@@ -417,25 +417,25 @@ public class KeyHandler implements DeviceKeyHandler {
     }
 
     public boolean canHandleKeyEvent(KeyEvent event) {
-        int scanCode = event.getScanCode();
+         int scanCode = event.getScanCode();
 
-        if (DEBUG) {
-            Log.d(TAG, "DEBUG: action=" + event.getAction()
-                    + ", flags=" + event.getFlags()
-                    + ", keyCode=" + event.getKeyCode()
-                    + ", scanCode=" + event.getScanCode()
-                    + ", metaState=" + event.getMetaState()
-                    + ", repeatCount=" + event.getRepeatCount());
-        }
+         if (DEBUG) {
+             Log.d(TAG, "DEBUG: action=" + event.getAction()
+                     + ", flags=" + event.getFlags()
+                     + ", keyCode=" + event.getKeyCode()
+                     + ", scanCode=" + event.getScanCode()
+                     + ", metaState=" + event.getMetaState()
+                     + ", repeatCount=" + event.getRepeatCount());
+         }
 
-        boolean isFPScanCode = ArrayUtils.contains(sSupportedFPGestures, scanCode);
-        boolean isAssistantCode = scanCode == ASSISTANT_SCANCODE;
-        if (!isFPScanCode || !isAssistantCode) {
-            return false;
-        }
+         boolean isFPScanCode = ArrayUtils.contains(sSupportedFPGestures, scanCode);
+         boolean isAssistantCode = scanCode == ASSISTANT_SCANCODE;
+         if (!isFPScanCode && !isAssistantCode) {
+             return false;
+         }
 
-        return true;
-    }
+         return true;
+     }
 
     public boolean isCameraLaunchEvent(KeyEvent event) {
         return false;
@@ -601,7 +601,7 @@ public class KeyHandler implements DeviceKeyHandler {
     }
 
     private void triggerVirtualKeypress(final Handler handler, final int keyCode) {
-        final InputManager im = InputManager.getInstance();
+        final InputManager im = mContext.getSystemService(InputManager.class);
         long now = SystemClock.uptimeMillis();
 
         final KeyEvent downEvent = new KeyEvent(now, now, KeyEvent.ACTION_DOWN,
