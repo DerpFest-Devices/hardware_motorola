@@ -4,6 +4,6 @@
 //
 
 runtime_resource_overlay {
-    name: "FrameworksResMotoCommon",
-    vendor: true,
+    name: "EuiccPolicyMoto",
+    product_specific: true,
 }

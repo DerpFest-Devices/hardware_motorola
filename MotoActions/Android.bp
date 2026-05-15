@@ -1,31 +1,28 @@
+//
+// SPDX-FileCopyrightText: The LineageOS Project
+// SPDX-License-Identifier: Apache-2.0
+//
+
 android_app {
     name: "MotoActions",
-    srcs: ["src/**/*.java"],
+    defaults: ["SettingsLibDefaults"],
+
+    srcs: ["src/**/*.kt"],
     resource_dirs: ["res"],
-    
-    platform_apis: true,
+
     certificate: "platform",
-    privileged: true,
+    platform_apis: true,
+    system_ext_specific: true,
 
     static_libs: [
         "androidx.core_core",
-        "android-support-v13",
         "androidx.preference_preference",
-        "SettingsLib",
         "org.lineageos.settings.resources",
     ],
 
-    optional_uses_libs: [
-        "androidx.window.extensions",
-        "androidx.window.sidecar",
-    ],
-
     optimize: {
-        enabled: false,
+        optimize: true,
         proguard_flags_files: ["proguard.flags"],
-    },
-    
-    dex_preopt: {
-        enabled: true,
+        shrink_resources: true,
     },
 }
